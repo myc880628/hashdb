@@ -2,7 +2,7 @@ package hashdb
 
 import (
 	"bytes"
-	"github.com/pkg/errors"
+	"errors"
 	"os"
 	"sync"
 )
@@ -27,8 +27,8 @@ func (db *HashDB) Path() string {
 }
 
 func (db *HashDB) put(key, value []byte) (err error) {
-	assert(key != nil, "db.put: key is not empty")
-	assert(value != nil, "db.put: value is not empty")
+	assert(key != nil, "db.put: key is not nil")
+	assert(value != nil, "db.put: value is not nil")
 
 	r := newRecord(key, value)
 	r.tryDecompressValue()
