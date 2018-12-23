@@ -13,6 +13,10 @@ type (
 	}
 )
 
+const (
+	headerSize = int(unsafe.Sizeof(header{}))
+)
+
 func (h *header) encode(writer io.Writer) {
 	binary.Write(writer, binary.BigEndian, h.flags)
 	binary.Write(writer, binary.BigEndian, h.ksize)
