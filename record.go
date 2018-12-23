@@ -90,7 +90,7 @@ func (r *record) tryCompressValue() (ok bool) {
 	assert(r.flags&compressFlag == 0, "the record has not been compressed yet")
 	if r.size() > paddingSize {
 		value := snappy.Encode(nil, r.value)
-		if len(value) <= int(float64(len(r.value))*compressRatioLimit) {
+		if len(value) <= int(float64(r.vsize)*compressRatioLimit) {
 			ok = true
 			r.value = value
 			r.vsize = uint32(len(value))
