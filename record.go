@@ -38,14 +38,6 @@ const (
 )
 
 const (
-	headerSize = int(unsafe.Sizeof(header{}))
-)
-
-const (
-	trailerSize = int(unsafe.Sizeof(trailer{}))
-)
-
-const (
 	paddingSize = 256
 )
 
