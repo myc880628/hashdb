@@ -26,12 +26,6 @@ func (db *HashDB) Path() string {
 	return db.path
 }
 
-func copyBytes(src []byte) []byte {
-	dst := make([]byte, len(src))
-	copy(dst, src)
-	return dst
-}
-
 func (db *HashDB) put(key, value []byte) (err error) {
 	assert(key != nil, "db.put: key is not empty")
 	assert(value != nil, "db.put: value is not empty")
