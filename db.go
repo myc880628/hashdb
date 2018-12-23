@@ -10,6 +10,7 @@ import (
 type (
 	HashDB struct {
 		lock   sync.Mutex
+		mu     sync.RWMutex
 		size   int64
 		file   *os.File
 		path   string
@@ -35,7 +36,7 @@ func (db *HashDB) put(key, value []byte) (err error) {
 	assert(value != nil, "db.put: value is not nil")
 
 	r := newRecord(key, value)
-	r.tryDecompressValue()
+	r.tryCompressValue()
 
 	fileSize := db.size
 	if err = db.writeRecord(r); err != nil {
