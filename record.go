@@ -76,10 +76,6 @@ func (r *record) isDeleted() bool {
 	return r.flags&typeDeletion != 0
 }
 
-func (r *record) isValueCompressed() bool {
-	return r.flags&compressFlag != 0
-}
-
 // disk size for this record
 func (r *record) size() int {
 	return int(r.ksize) + int(r.vsize) + headerSize + trailerSize
