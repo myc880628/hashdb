@@ -22,6 +22,10 @@ var (
 	ErrNotFound = errors.New("record not found")
 )
 
+var (
+	blankBuffer = make([]byte, paddingSize)
+)
+
 func (db *HashDB) Path() string {
 	return db.path
 }
@@ -102,11 +106,11 @@ func (db *HashDB) writeRecord(r *record) error {
 	_ = r.encode(&db.buffer)
 	if size := db.buffer.Len(); size%paddingSize != 0 {
 		// align to padding size
-		db.buffer.Write(make([]byte, paddingSize-size%paddingSize))
+		db.buffer.Write(blankBuffer[:paddingSize-size%paddingSize])
 	}
 
 	n, err := db.file.Write(db.buffer.Bytes())
-	if err != nil {
+	if err != nil && n > 0 {
 		_ = db.file.Truncate(db.size)
 		return err
 	}
