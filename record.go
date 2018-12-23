@@ -4,10 +4,10 @@ import (
 	"hash/crc32"
 	"io"
 	"unsafe"
-
+	"errors"
 	"bytes"
+	
 	"github.com/golang/snappy"
-	"github.com/pkg/errors"
 )
 
 var (
