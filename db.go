@@ -93,9 +93,7 @@ func (db *HashDB) Get(key []byte) ([]byte, error) {
 	if r == nil || r.isDeleted() {
 		return nil, ErrNotFound
 	}
-	if r.isValueCompressed() {
-		r.tryDecompressValue()
-	}
+	r.tryDecompressValue()
 	return r.value, nil
 }
 
