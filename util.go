@@ -21,3 +21,9 @@ func byteSliceToString(b []byte) (s string) {
 	sh.Len = bh.Len
 	return
 }
+
+func copyBytes(src []byte) []byte {
+	dst := make([]byte, len(src))
+	copy(dst, src)
+	return dst
+}
