@@ -11,6 +11,10 @@ type (
 	}
 )
 
+const (
+	trailerSize = int(unsafe.Sizeof(trailer{}))
+)
+
 func (t *trailer) encode(writer io.Writer) {
 	binary.Write(writer, binary.BigEndian, t.sum32)
 }
